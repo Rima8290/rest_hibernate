@@ -10,14 +10,15 @@ import javax.persistence.Query;
 
 public class CustomerDao {
 	
-	public void databaseAdd(Customer customer) {
+	/*public void databaseAdd(Customer customer) {
 		
 		//Step1. Load/create entity/ManagerFactory object
 		//During this step, META-INF Persistence.xml is read
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("oracle-pu");
+		EntityManagerFactory emf =null; 
 		//Step2. Load/Create EntityManager Object
-		EntityManager em = emf.createEntityManager();
-		
+		EntityManager em =null; 
+	try {	emf = Persistence.createEntityManagerFactory("oracle-pu");
+	        em = emf.createEntityManager();
 		//Step3. Start/Participate in a transaction
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
@@ -26,76 +27,98 @@ public class CustomerDao {
 		em.persist(customer); //persist method generates insert query
 		
 		tx.commit();
-		
+	}
 		//below code should be in finally block
+	finally {	
+		
 		em.close();
 		emf.close();
-		
+	}
 		
 	}
+	*/
 	
 public Customer databaseShow(int custId) {
 		
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("oracle-pu");
-		EntityManager em = emf.createEntityManager();
+		EntityManagerFactory emf = null; 
+		EntityManager em = null; 
+		try{
+			emf= Persistence.createEntityManagerFactory("oracle-pu");
 		
+		em = emf.createEntityManager();
 		//find method generates select query
 		Customer c = em.find(Customer.class, custId); //1st parameter is table name
+		return c;
+		}
 		
-		
+		finally {
 		em.close();
 		emf.close();
+		}
 		
-		return c;
 		
 	}
-public void databaseUpdate(Customer customer) {
+public void databaseUpdate(Customer customer) {// for insert or update
 	
-	EntityManagerFactory emf = Persistence.createEntityManagerFactory("oracle-pu");
-	EntityManager em = emf.createEntityManager();
+	EntityManagerFactory emf = null;
+	EntityManager em = null;
+	try{
+		 emf =Persistence.createEntityManagerFactory("oracle-pu");
+		 em = emf.createEntityManager();
+	     EntityTransaction tx = em.getTransaction();
+	     tx.begin();
 	
-	EntityTransaction tx = em.getTransaction();
-	tx.begin();
+
+	    em.merge(customer);//For insert and update 
 	
-	em.merge(customer);
-	
-	tx.commit();
-	
+	    tx.commit();
+	  }
+	finally {
 	em.close();
 	emf.close();
-	
+	}
 	
 }
 public List<Customer> selectAll() {
 	
-	EntityManagerFactory emf = Persistence.createEntityManagerFactory("oracle-pu");
-	EntityManager em = emf.createEntityManager();
+	EntityManagerFactory emf =null; 
+	EntityManager em = null;
+	try { 
+		emf = Persistence.createEntityManagerFactory("oracle-pu");
+         em = emf.createEntityManager();	
 	
 	//introducing JP-QL
 	Query q=em.createQuery("select c from Customer c ");
 	List<Customer> list=q.getResultList();
+	return list;
+	}
 	
+	finally {
 	em.close();
 	emf.close();
+	}
 	
-	return list;
 	
 }
 public List<Customer> fetchCustomerByEmail(String email) {
 	
-	EntityManagerFactory emf = Persistence.createEntityManagerFactory("oracle-pu");
-	EntityManager em = emf.createEntityManager();
-	
+	EntityManagerFactory emf = null;
+	EntityManager em = null;
+	try {
+	emf= Persistence.createEntityManagerFactory("oracle-pu");
+	 em = emf.createEntityManager();
 	//introducing JP-QL
 	Query q=em.createQuery("select c from Customer c where c.email like :em");
 	q.setParameter("em", "%" + email + "%");
 	//q.setParameter(0, email);
 	List<Customer> list=q.getResultList();
-	
+	return list;
+	}
+	finally {
 	em.close();
 	emf.close();
+	}
 	
-	return list;
 	
 }
 }

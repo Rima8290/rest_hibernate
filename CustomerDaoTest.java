@@ -16,19 +16,19 @@ public class CustomerDaoTest {
 	@Test
 	public void testAdd() throws ParseException {
 		Customer c = new Customer();
-		c.setName("Harry");
-		c.setEmail("Harka@gmail.com");
-		c.setCity("NCR");
+		c.setName("Riya");
+		c.setEmail("abc@gmail.com");
+		c.setCity("Mumbai");
 	
 		SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");
-		  String d="15/05/1995";
+		  String d="7/12/1996";
 		Date dt=sdf.parse(d);
 		//java.sql.Date dob=new java.sql.Date(dt.getTime());
 		//c.setDateOfBirth(dateOfBirth); //try this on your own
 		c.setDateOfBirth(dt);
 		
 		CustomerDao dao = new CustomerDao();
-		dao.databaseAdd(c);
+		dao.databaseUpdate(c);
 	}
 	
 	@Test
@@ -51,7 +51,8 @@ public class CustomerDaoTest {
 			System.out.println(customer.getName());
 			System.out.println(customer.getEmail());
 			System.out.println(customer.getDateOfBirth());
-			System.out.println(customer.getCity());
+			System.out.println(customer.getCity(
+					));
 		}
 		
 	}
@@ -60,7 +61,7 @@ public class CustomerDaoTest {
 	public void testUpdate() {
 		CustomerDao dao = new CustomerDao();
 		Customer cust = dao.databaseShow(3);
-		cust.setCity("Chennai");
+		cust.setCity("Rajasthan");
 		dao.databaseUpdate(cust);
 	}
 	@Test
