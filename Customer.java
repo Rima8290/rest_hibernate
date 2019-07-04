@@ -8,23 +8,25 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
 @Entity
 @Table(name="TBL_CUST")
 public class Customer {
-	
-	@Id//primary key
-	@GeneratedValue//generated automatically
+
+	@Override
+	public String toString() {
+		return "Customer [id=" + id + ", name=" + name + ", email=" + email + ", dob=" + dob + ", city=" + city + "]";
+	}
+	@Id //pk
+	@GeneratedValue
 	@Column(name="CUST_ID")
 	private int id;
 	
 	private String name;
-	
 	@Column(unique=true)
 	private String email;
-
-	private Date dateOfBirth;
+	private Date dob;
 	private String city;
-	
 	
 	public int getId() {
 		return id;
@@ -44,11 +46,11 @@ public class Customer {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public Date getDateOfBirth() {
-		return dateOfBirth;
+	public Date getDob() {
+		return dob;
 	}
-	public void setDateOfBirth(Date dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
+	public void setDob(Date dob) {
+		this.dob = dob;
 	}
 	public String getCity() {
 		return city;
@@ -58,5 +60,5 @@ public class Customer {
 	}
 	
 	
-
+	
 }

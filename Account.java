@@ -10,21 +10,22 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="ACCOUNT")
+@Table(name="TBL_ACC")
 public class Account {
-
-	@Id//primary key
-	@GeneratedValue//generated automatically
-	@Column(name="ACC_ID")
-	 private long acno;
-	 private String name;
-	 
-	 @Column(name="ACC_TYPE")
-	 private String type;
-	 private double balance;
-	 
-	 @OneToMany
-	 private Set<Transaction> transactions;   //bidirectional association
+ 
+	@Id
+	@GeneratedValue
+	@Column(name="ACNO")
+	private long acno;
+	
+	private String name;
+	
+	@Column(name="AC_TYPE")
+	private String type;
+	private double balance;
+	
+	@OneToMany(mappedBy = "account")
+	private Set<TransactionLog> transactionlog;
 
 	public long getAcno() {
 		return acno;
@@ -58,12 +59,16 @@ public class Account {
 		this.balance = balance;
 	}
 
-	public Set<Transaction> getTransactions() {
-		return transactions;
+	public Set<TransactionLog> getTransactionlog() {
+		return transactionlog;
 	}
 
-	public void setTransactions(Set<Transaction> transactions) {
-		this.transactions = transactions;
+	public void setTransactionlog(Set<TransactionLog> transactionlog) {
+		this.transactionlog = transactionlog;
 	}
+	
+	
+	
+	
+
 }
-

@@ -1,5 +1,9 @@
-package com.lti.entity;
+package com.lti.hibernate;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -8,60 +12,57 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-public class GenericDao {
-
-	public void UpdateOrInsert(Object obj) { // for insert or update
-
-		EntityManagerFactory emf = null;
-		EntityManager em = null;
+public class GenericDao {//BaseDao,CommonDao,SabkaDao,...
+	
+	public void save(Object obj) {
+		EntityManager em =null;
+		EntityManagerFactory emf=null;
+		
 		try {
-			emf = Persistence.createEntityManagerFactory("oracle-pu");
-			em = emf.createEntityManager();
-			EntityTransaction tx = em.getTransaction();
-			tx.begin();
-
-			em.merge(obj);// For insert and update
-
-			tx.commit();
-		} finally {
-			em.close();
-			emf.close();
+			emf=Persistence.createEntityManagerFactory("oracle-pu");
+			em= emf.createEntityManager();
+			EntityTransaction ts=em.getTransaction();
+			ts.begin();
+			//Find Method generates select Query
+			em.merge(obj);//merge method can be used for insert as well as update
+			ts.commit();
 		}
-
-	}
-
-	public Object showById(Class classname, Object id) {
-
-		EntityManagerFactory emf = null;
-		EntityManager em = null;
-		try {
-			emf = Persistence.createEntityManagerFactory("oracle-pu");
-
-			em = emf.createEntityManager();
-			// find method generates select query
-			//Object obj = em.find(Object.class, id); // 1st parameter is table name
-			Object obj = em.find(classname, id);
-			return obj;
-		} 
-
+		
 		finally {
 			em.close();
 			emf.close();
 		}
 
 	}
-
-	public <E> List<E> fetchAll(Class<E> clazz) {
-
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("oracle-pu");
-		EntityManager em = emf.createEntityManager();
-
-		// introducing JP-QL
-		Query q = em.createQuery("select obj from " + clazz.getName() + " as obj ");
-		List<E> list = q.getResultList();
-
-		em.close();
-		emf.close();
-		return list;
+	public Object fetchById(Class classname, Object sId) {
+		EntityManager em =null;
+		EntityManagerFactory emf=null;
+		
+		 try {
+				 emf=Persistence.createEntityManagerFactory("oracle-pu");
+		        em= emf.createEntityManager();
+			
+				//Find Method generates select Query
+				Object obj= em.find(classname, sId);
+				return obj;
+		 }
+		 
+		 
+			finally {	
+				em.close();
+				emf.close();
+			}
+		
 	}
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
 }
