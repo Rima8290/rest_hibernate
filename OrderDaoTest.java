@@ -1,5 +1,8 @@
 package com.lti.test;
 
+import static org.junit.Assert.*;
+
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -8,70 +11,35 @@ import org.junit.Test;
 import com.lti.entity.Customer;
 import com.lti.entity.GenericDao;
 import com.lti.entity.Order;
-import com.lti.entity.Payment;
 
 public class OrderDaoTest {
-	
+
 	@Test
-	public void placeOrder() {
 		
-		GenericDao dao=new GenericDao();
-		Customer cust=(Customer)dao.fetchById(Customer.class,42);
-		
-		Order o=new Order();
-		/*Date d;
-		d = new SimpleDateFormat("dd/MM/yyyy").parse("27/10/1997");*/
-		o.setOrderDate(new Date());
-		o.setAmount(1788.50);
-		o.setCustomer(cust);
-		
-		dao.save(o); 
-		
+		public void placeOrder() {
+		         GenericDao dao = new GenericDao();
+		         Customer cust = (Customer) dao.fetchByPk(Customer.class,1);
+		         
+		         Order order = new Order();
+		        // order.setId(1);
+		         order.setOrderDate(new Date());
+		         order.setAmount(653330);
+		         order.setCustomer(cust);
+		         dao.save(order);
 		
 	}
 	
 	@Test
-	public void fetchOrderDetails() {
-		
-		GenericDao dao=new GenericDao();
-		//Customer cust=(Customer)dao.fetchById(Customer.class,42);
-		Payment payment=(Payment)dao.fetchById(Payment.class,84);
-		Order order =(Order)dao.fetchById(Order.class, 61);
-		/*Date d;
-		d = new SimpleDateFormat("dd/MM/yyyy").parse("27/10/1997");*/
-		order.setPayment(payment);
-		dao.save(order);
-		/*List<Order> orders = dao.fetchAllPayment(Order.class);
-		for(Order order1:orders) {
-			System.out.println(order1.getId());
-			System.out.println(order1.getPayment().getPmode());
-			System.out.println(order1.getPayment().getAmount());
-			System.out.println(order1.getPayment().getPstatus());
-			System.out.println(order1.getAmount());
-			System.out.println(order1.getOrderDate());
-		 
-		
-		}*/
+	     public void display() {
+		 GenericDao dao = new GenericDao();
+		 List<Order> or = dao.fetchAll(Order.class);
+		 for(Order order: or) {
+			 System.out.println(order.getId());
+			 System.out.println(order.getOrderDate());
+			 System.out.println(order.getAmount());
+			 System.out.println(order.getCustomer().getName());
+		 }
 	}
-	@Test
-	public void fetchData() {
-		
-		GenericDao dao=new GenericDao();
-		List<Order> orders = dao.fetchAll(Order.class);
-		for(Order order1:orders) {
-			System.out.println(order1.getId());
-			System.out.println(order1.getCustomer().getName());
-			System.out.println(order1.getCustomer().getEmail());
-			System.out.println(order1.getPayment().getPay_id());
-			System.out.println(order1.getPayment().getPmode());
-			System.out.println(order1.getPayment().getPstatus());
-			System.out.println(order1.getAmount());
-			System.out.println(order1.getOrderDate());
-			
-			
-		}
-		
-		
-	}
+	
 
 }

@@ -1,96 +1,62 @@
 package com.lti.test;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import static org.junit.Assert.*;
+
 import java.util.List;
 
 import org.junit.Test;
 
 import com.lti.entity.Customer;
 import com.lti.entity.CustomerDao;
-import com.lti.entity.GenericDao;
 
 public class CustomerDaoTest {
 
 	@Test
-	public void addTest() {
-		try {
-		Customer c=new Customer();
-		c.setName("Sneha");
-		c.setEmail("sneha@abc.com");
-		Date d;
-		d = new SimpleDateFormat("dd/MM/yyyy").parse("27/10/1997");
-		c.setDob(d);
-		c.setCity("Palakkad");
-		CustomerDao dao=new CustomerDao();
-		dao.insertOrUpdate(c);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public void testAdd() {
+		Customer c = new Customer();
+		c.setName("godi");
+		c.setEmail("godi@gmail");
+		c.setCity("kerala");
+	    //temporalValues.setLocalDate(LocalDate.parse("2017-11-15"));
 		
-	}
+			/* c = new Customer();
+				c.setName("sneha");
+				c.setEmail("sneha@gmail.com");
+				c.setCity("ooty");
+				
+				
+					 c = new Customer();
+						c.setName("syed");
+						c.setEmail("syed@gmail.com");
+						c.setCity("chennai");
+						
+						 c = new Customer();
+							c.setName("riya");
+							c.setEmail("riya@gmail.com");
+							c.setCity("mumbai");*/
+			CustomerDao dao = new CustomerDao();
+            dao.update(c);
+		}
 	
 	@Test
-	public void fetchTest() {
-		CustomerDao dao=new CustomerDao();
-		Customer c=new Customer();
-		c=dao.fetch(1);
-		System.out.println(c);
+	public void testFetch() {
+		CustomerDao dao = new CustomerDao();
+		List<Customer> cust = dao.fetchAll("gmail");
+		
+		for(Customer c : cust) {
+			System.out.println(c.getName());
+			System.out.println(c.getEmail());
+			//System.out.println(cust.getDateOfBirth());
+			System.out.println(c.getCity());
+		}
 	}
 	@Test
-	public void testUpdate() {
-		
-		CustomerDao dao=new CustomerDao();
-		Customer c=dao.fetch(1);
-		c.setCity("Konkan");
-			dao.insertOrUpdate(c);
-			System.out.println("Updated");  
-		
-		
-	}
-	
-    @Test
-	public void testdisplay(){
-		
-		CustomerDao dao=new CustomerDao();
-		List <Customer>list=dao.display();
-		for(Customer li:list) {
-			System.out.println(li.getName());
-			System.out.println(li.getEmail());
-			System.out.println(li.getDob());
-			System.out.println(li.getCity());
-		}
-		
-	}
-    
-    //nfetch all using generic dao
-    @Test
-	public void displayData(){
-		
-		GenericDao dao=new GenericDao();
-		List<Customer> orders =dao.fetchAll(Customer.class);
-		for(Customer li:orders) {
-			System.out.println(li.getName());
-			System.out.println(li.getEmail());
-			System.out.println(li.getDob());
-			System.out.println(li.getCity());
-		}
-		
-	}
-    
-    @Test
-    public void testemail() {
-    	CustomerDao dao=new CustomerDao();
-    	List <Customer>list=dao.fetchCustomersByEmail("abc");
-    	for(Customer li:list) {
-			System.out.println(li.getName());
-			System.out.println(li.getEmail());
-			System.out.println(li.getDob());
-			System.out.println(li.getCity());
-		}
-		
-    }
+	public void testupdate() {
+		CustomerDao dao = new CustomerDao();
+	//	Customer cust = dao.fetchAll(1);
 
+	/*	cust.setCity("delhi");
+		dao.update(cust);*/
+
+	}
 }
