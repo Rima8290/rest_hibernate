@@ -1,8 +1,12 @@
 package com.lti.component;
 
-public class HelloWorld {
+import org.springframework.stereotype.Component;
 
-      public String sayHello(String name) {
-	       return "Hello " + name;
-}
+
+public class HelloWorld implements HelloInterface {
+
+	public String  sayHello(String name) {
+		return "Hello " + name;
+		
+	}
 }

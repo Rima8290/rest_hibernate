@@ -1,11 +1,16 @@
 package com.lti.component;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Component("cc") //alternative to <bean id="..." class="...">
+@Component("c2") //alternative to <bean id=".." class="..">
 public class CurrencyConverter {
 	
-	  public double convertDollarToRupees( double dollars) {
-		return dollars * 68.44;
+	  @Autowired  //field injection
+		private Dollar dl;
+		
+	  public void converter(double value) {
+	  System.out.println("The converted value is "+ value*dl.CurrentDollarValue());
 	}
+
 }
