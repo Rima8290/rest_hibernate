@@ -1,22 +1,31 @@
 package com.lti.component;
 
-public class CarPart {
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-	 private int partNo;
-	 private String partName;
-	 private String carModel;
-	 private int quantity;
-	public int getPartNo() {
-		return partNo;
+@Entity
+@Table(name="TBL_CARPARTS")
+public class CarPart {
+	
+    @Id 									
+	
+	private int partno;
+	private String partname;
+	private String carModel;
+	private int quantity;
+	
+	public int getPartno() {
+		return partno;
 	}
-	public void setPartNo(int partNo) {
-		this.partNo = partNo;
+	public void setPartno(int partno) {
+		this.partno = partno;
 	}
-	public String getPartName() {
-		return partName;
+	public String getPartname() {
+		return partname;
 	}
-	public void setPartName(String partName) {
-		this.partName = partName;
+	public void setPartname(String partname) {
+		this.partname = partname;
 	}
 	public String getCarModel() {
 		return carModel;
@@ -30,6 +39,7 @@ public class CarPart {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	 
+	
+	
 
 }
