@@ -4,34 +4,30 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
-@Table(name="TABLE_USERS")
-public class User {
+import org.springframework.web.multipart.MultipartFile;
+
+//@Entity
+//@Table(name="TABLE_USERS")
+public class UserDTO {   //----------Data Transfer Object
 	
    private String name;
    private int age;
    
-   @Id
+   //@Id
    private String email;
    private String city;
-   private String profilePicFilename;
+   private MultipartFile profilePic;
    
    
-   
-   public String getProfilePicFilename() {
-	return profilePicFilename;
+   public MultipartFile getProfilePic() {
+	return profilePic;
 }
 
-public void setProfilePicFilename(String profilePicFilename) {
-	this.profilePicFilename = profilePicFilename;
+public void setProfilePic(MultipartFile profilePic) {
+	this.profilePic = profilePic;
 }
-
-@Override
-   public String toString() {
-   	return "User [name=" + name + ", age=" + age + ", email=" + email + ", city=" + city + "]";
-   }
-   
-public String getName() {
+ 
+   public String getName() {
 	return name;
 }
 public void setName(String name) {

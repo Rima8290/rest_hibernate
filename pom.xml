@@ -1,49 +1,89 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.lti.spring</groupId>
-  <artifactId>Example2</artifactId>
+  <groupId>com.lti.training</groupId>
+  <artifactId>spring-mvc</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
+  
+  <properties>
+       <spring.version>5.1.8.RELEASE</spring.version>
+       <jackson.version>2.9.9</jackson.version>
+       <oracle.version>12.2.0.1</oracle.version>
+       <aapache.version>2.6.0</aapache.version>
+       <hibernate.version>5.4.3.Final</hibernate.version>
+       <fileupload.version>1.4</fileupload.version>
+ </properties>
+  
   
   <dependencies>
-  
-  <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-core</artifactId>
-        <version>5.1.8.RELEASE</version>
-  </dependency>
-  <dependency>
+  	<dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-core</artifactId>
+  		<version>${spring.version}</version>
+  	</dependency>
+  	
+  	<dependency>
         <groupId>org.springframework</groupId>
         <artifactId>spring-context</artifactId>
-        <version>5.1.8.RELEASE</version>
+        <version>${spring.version}</version>
   </dependency>
   
-   <dependency>
+  	<dependency>
         <groupId>org.springframework</groupId>
         <artifactId>spring-jdbc</artifactId>
-        <version>5.1.8.RELEASE</version>
+        <version>${spring.version}</version>
   </dependency>
+  
+  <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-orm</artifactId>
+        <version>${spring.version}</version>
+  </dependency>
+  
+  <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-web</artifactId>
+        <version>${spring.version}</version>
+  </dependency>
+  
+  <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-webmvc</artifactId>
+        <version>${spring.version}</version>
+  </dependency>
+  
+  <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+<dependency>
+    <groupId>com.fasterxml.jackson.core</groupId>
+    <artifactId>jackson-databind</artifactId>
+    <version>${jackson.version}</version>
+</dependency>
   
   <dependency>
         <groupId>com.oracle</groupId>
         <artifactId>ojdbc8</artifactId>
-        <version>12.2.0.1</version>
+        <version>${oracle.version}</version>
   </dependency>
   
-  <dependency>
-  <groupId>org.apache.commons</groupId>
-  <artifactId>commons-dbcp2</artifactId>
-  <version>2.6.0</version>
-</dependency>
 <dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>5.4.3.Final</version>
-		</dependency>
-		<dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-orm</artifactId>
-        <version>5.1.8.RELEASE</version>
-  </dependency>
+       <groupId>org.apache.commons</groupId>
+       <artifactId>commons-dbcp2</artifactId>
+       <version>${aapache.version}</version>
+</dependency>
+
+
+<dependency>
+<groupId>org.hibernate</groupId>
+<artifactId>hibernate-core</artifactId>
+<version>${hibernate.version}</version>
+</dependency>
+
+<dependency>
+    <groupId>commons-fileupload</groupId>
+    <artifactId>commons-fileupload</artifactId>
+    <version>${fileupload.version}</version>
+</dependency>
+		
   
   </dependencies>
 </project>
