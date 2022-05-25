@@ -6,7 +6,7 @@
   <packaging>war</packaging>
   
   <properties>
-       <spring.version>5.1.8.RELEASE</spring.version>
+       <spring.version>5.2.22.RELEASE</spring.version>
        <jackson.version>2.9.9</jackson.version>
        <oracle.version>12.2.0.1</oracle.version>
        <aapache.version>2.6.0</aapache.version>
